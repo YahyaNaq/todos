@@ -1,14 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Todo } from '../../models/todo.model';
 import { TodoService } from '../../services/todo.service';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-todo-list',
-  imports: [MatPaginatorModule, MatSortModule, MatTableModule],
+  imports: [MatPaginatorModule, MatSortModule, MatTableModule, RouterLink, CommonModule, MatButtonModule, MatIconModule],
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })

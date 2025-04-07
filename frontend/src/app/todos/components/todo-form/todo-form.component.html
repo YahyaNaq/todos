@@ -17,7 +17,7 @@
             <textarea matInput id="description" formControlName="description"></textarea>
         </mat-form-field>
 
-        <mat-checkbox formControlName="is_completed">
+        <mat-checkbox *ngIf="todoId" formControlName="is_completed">
             Completed
         </mat-checkbox>
 
