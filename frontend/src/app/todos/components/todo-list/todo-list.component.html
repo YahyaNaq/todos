@@ -1,0 +1,13 @@
+<div *ngIf="loading">Loading...</div>
+
+<ul *ngIf="!loading && todos.length">
+  <li *ngFor="let todo of todos">
+    <input type="checkbox" [checked]="todo.is_completed" disabled />
+    <strong>{{ todo.title }}</strong>
+    <p *ngIf="todo.description">{{ todo.description }}</p>
+  </li>
+</ul>
+
+<div *ngIf="!loading && !todos.length">
+  No tasks available.
+</div>
