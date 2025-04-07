@@ -9,9 +9,8 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 export const httpInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn) => {
-  const token = localStorage.getItem('access_token'); // or from a TokenService
+  const token = localStorage.getItem('access_token');
 
-  // Clone request with Authorization header
   const authReq = token
     ? req.clone({
         setHeaders: {
@@ -24,9 +23,7 @@ export const httpInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
     catchError((error: HttpErrorResponse) => {
       console.error('HTTP Error:', error);
 
-      // Handle specific status codes
       if (error.status === 401) {
-        // Optional: redirect to login, clear storage, etc.
       }
 
       return throwError(() => error);

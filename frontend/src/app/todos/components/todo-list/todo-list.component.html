@@ -1,13 +1,44 @@
-<div *ngIf="loading">Loading...</div>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let todo">{{ todo.id }}</td>
+    </ng-container>
 
-<ul *ngIf="!loading && todos.length">
-  <li *ngFor="let todo of todos">
-    <input type="checkbox" [checked]="todo.is_completed" disabled />
-    <strong>{{ todo.title }}</strong>
-    <p *ngIf="todo.description">{{ todo.description }}</p>
-  </li>
-</ul>
+    <!-- Name Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let todo">{{ todo.title }}</td>
+    </ng-container>
 
-<div *ngIf="!loading && !todos.length">
-  No tasks available.
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let todo">{{ todo.description }}</td>
+    </ng-container>
+
+    <!-- Category Column -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+      <td mat-cell *matCellDef="let todo">{{ todo.category }}</td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let todo">{{ todo.is_completed ? 'Completed' : 'Pending' }}</td>
+    </ng-container>
+
+    <!-- Header and Footer -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Paginator -->
+  <mat-paginator
+    [length]="dataSource.data.length"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 20]"
+  ></mat-paginator>
 </div>

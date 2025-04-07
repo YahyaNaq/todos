@@ -1,1 +1,44 @@
-<p>todo-form works!</p>
+<mat-card class="todo-form-container">
+    <mat-card-title>{{ todoId ? 'Edit' : 'Add' }} To-Do</mat-card-title>
+
+    <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Title</mat-label>
+            <input matInput id="title" formControlName="title" />
+            <mat-error *ngIf="todoForm.get('title')?.touched && todoForm.get('title')?.invalid">
+                <div *ngIf="todoForm.get('title')?.hasError('required')">Title is required.</div>
+                <div *ngIf="todoForm.get('title')?.hasError('minlength')">Title must be at least 3 characters long.
+                </div>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Description</mat-label>
+            <textarea matInput id="description" formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="is_completed">
+            Completed
+        </mat-checkbox>
+
+        <!-- Category Dropdown -->
+        <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categories" [value]="category.id">
+                    {{ category.name }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="todoForm.get('category')?.touched && todoForm.get('category')?.invalid">
+                Category is required.
+            </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="todoForm.invalid">
+                {{ todoId ? 'Update' : 'Create' }}
+            </button>
+            <button mat-button type="button" (click)="onReset()">Reset</button>
+        </div>
+    </form>
+</mat-card>

@@ -1,4 +1,3 @@
-// src/app/app.routes.ts
 import { Routes } from '@angular/router';
 import { TodoListComponent } from './todos/components/todo-list/todo-list.component';
 import { TodoFormComponent } from './todos/components/todo-form/todo-form.component';
